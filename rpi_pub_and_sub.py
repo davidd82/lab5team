@@ -5,6 +5,7 @@ Run rpi_pub_and_sub.py on your Raspberry Pi."""
 import paho.mqtt.client as mqtt
 import time
 from grovepi import *
+from grove_rgb_lcd import *
 
 led = 4
 ultrasonic_ranger = 3
@@ -21,12 +22,17 @@ def led_status(client, userdata, message):
         digitalWrite(led,0)
         print("Turned off LED")
 
+def lcd_status(client, userdata, message):
+    setText_norefresh(message)
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
     #subscribe to topics of interest here
     client.subscribe("davidd82/led")
     client.message_callback_add("davidd82/customCallback", led_status)
+    client.subscribe("davidd82/lcd")
+    client.message_callback_add("davidd82/customCallback", lcd_status)
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
