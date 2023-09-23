@@ -6,7 +6,7 @@ import paho.mqtt.client as mqtt
 import time
 
 #Custom callbacks need to be structured with three args like on_message()
-def custom_callback(client, userdata, message):
+def message_from_ultrasonic(client, userdata, message):
     print("VM: " + str(message.payload.decode("utf-8")) + " cm")
 
 def on_connect(client, userdata, flags, rc):
@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 
     #subscribe to the ultrasonic ranger topic here
     client.subscribe("davidd82/ultrasonicRanger")
-    client.message_callback_add("davidd82/customCallback", custom_callback)
+    client.message_callback_add("davidd82/customCallback", message_from_ultrasonic)
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -23,7 +23,7 @@ def on_message(client, userdata, msg):
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
     client = mqtt.Client()
-    client.on_message = custom_callback
+    client.on_message = message_from_ultrasonic
     client.on_connect = on_connect
     client.connect(host= "test.mosquitto.org", port= 1883, keepalive=60)
     client.loop_start()
