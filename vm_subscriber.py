@@ -28,8 +28,7 @@ def on_message(client, userdata, msg):
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
     client = mqtt.Client()
-    client.message_callback_add = message_from_ultrasonic
-    client.message_callback_add = message_from_button
+    #client.on_message = 
     client.on_connect = on_connect
     client.connect(host= "test.mosquitto.org", port= 1883, keepalive=60)
     client.loop_start()
