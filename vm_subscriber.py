@@ -7,13 +7,8 @@ import time
 
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback(client, userdata, message):
-    #the third argument is 'message' here unlike 'msg' in on_message 
-    print("custom_callback: " + message.topic + " " + "\"" + 
-        str(message.payload, "utf-8") + "\"")
-    print("custom_callback: message.payload is of type " + 
-          str(type(message.payload)))
     print("VM: " + str(message.payload.decode("utf-8")) + " cm")
-    
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 

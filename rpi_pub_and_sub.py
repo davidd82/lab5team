@@ -12,12 +12,6 @@ ultrasonic_ranger = 3
 pinMode(led, "OUTPUT")
 
 def custom_callback(client, userdata, message):
-    #the third argument is 'message' here unlike 'msg' in on_message 
-    print("custom_callback: " + message.topic + " " + "\"" + 
-        str(message.payload, "utf-8") + "\"")
-    print("custom_callback: message.payload is of type " + 
-          str(type(message.payload)))
-    
     if (str(message.payload, "utf-8") == "LED_ON"):
         digitalWrite(led,1)
         print("Turned on LED")
