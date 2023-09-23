@@ -18,8 +18,10 @@ def custom_callback(client, userdata, message):
     
     if (str(message.payload, "utf-8") == "LED_ON"):
         digitalWrite(led,1)
+        print("Turned on LED")
     elif(str(message.payload, "utf-8") == "LED_OFF"):
         digitalWrite(led,0)
+        print("Turned off LED")
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
