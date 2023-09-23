@@ -17,9 +17,9 @@ def on_connect(client, userdata, flags, rc):
 
     #subscribe to the ultrasonic ranger topic here
     client.subscribe("davidd82/ultrasonicRanger")
-    client.message_callback_add("davidd82/customCallback", message_from_ultrasonic)
+    client.message_callback_add("davidd82/ultrasonicRanger", message_from_ultrasonic)
     client.subscribe("davidd82/button")
-    client.message_callback_add("davidd82/customCallback", message_from_button)
+    client.message_callback_add("davidd82/button", message_from_button)
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -28,7 +28,7 @@ def on_message(client, userdata, msg):
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
     client = mqtt.Client()
-    client.on_message = message_from_button
+    client.on_message = on_message
     client.on_connect = on_connect
     client.connect(host= "test.mosquitto.org", port= 1883, keepalive=60)
     client.loop_start()

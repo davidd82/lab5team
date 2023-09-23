@@ -17,10 +17,8 @@ pinMode(button, "INPUT")
 def led_status(client, userdata, message):
     if (str(message.payload, "utf-8") == "LED_ON"):
         digitalWrite(led,1)
-        print("Turned on LED")
     elif(str(message.payload, "utf-8") == "LED_OFF"):
         digitalWrite(led,0)
-        print("Turned off LED")
 
 def lcd_status(client, userdata, message):
     setText_norefresh(str(message.payload.decode("utf-8")))
