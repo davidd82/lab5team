@@ -28,12 +28,13 @@ def on_press(key):
         print("a")
         client.publish("davidd82/led", "LED_ON")
         # send "a" character to rpi
-        #send "LED_ON"
+        # send "LED_ON"
     elif k == 's':
         print("s")
         # send "s" character to rpi
     elif k == 'd':
         print("d")
+        client.publish("davidd82/led", "LED_OFF")
         # send "d" character to rpi
         # send "LED_OFF"
 
