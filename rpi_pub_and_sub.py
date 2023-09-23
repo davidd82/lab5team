@@ -43,10 +43,10 @@ if __name__ == '__main__':
     time.sleep(1)
     while True:
         button_status = digitalRead(button)
-        distance = ultrasonicRead(ultrasonic_ranger)
-        client.publish("davidd82/ultrasonicRanger", distance)
         if button_status:
             client.publish("davidd82/button", "Button pressed!")
+        distance = ultrasonicRead(ultrasonic_ranger)
+        client.publish("davidd82/ultrasonicRanger", distance)
         time.sleep(1)
             
 
