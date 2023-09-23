@@ -7,6 +7,8 @@ import time
 from grovepi import *
 
 led = 4
+ultrasonic_ranger = 3
+
 pinMode(led, "OUTPUT")
 
 def custom_callback(client, userdata, message):
@@ -44,6 +46,8 @@ if __name__ == '__main__':
 
     time.sleep(1)
     while True:
+        distance = ultrasonicRead(ultrasonic_ranger)
+        client.publish("davidd82/ultrasonicRanger", distance)
         time.sleep(1)
             
 

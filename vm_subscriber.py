@@ -12,7 +12,8 @@ def custom_callback(client, userdata, message):
         str(message.payload, "utf-8") + "\"")
     print("custom_callback: message.payload is of type " + 
           str(type(message.payload)))
-
+    print("VM: " + str(message.payload.decode("utf-8")) + " cm")
+    
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
