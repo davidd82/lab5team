@@ -30,9 +30,9 @@ def on_connect(client, userdata, flags, rc):
 
     #subscribe to topics of interest here
     client.subscribe("davidd82/led")
-    client.message_callback_add("davidd82/customCallback", led_status)
+    client.message_callback_add("davidd82/led", led_status)
     client.subscribe("davidd82/lcd")
-    client.message_callback_add("davidd82/customCallback", lcd_status)
+    client.message_callback_add("davidd82/lcd", lcd_status)
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
