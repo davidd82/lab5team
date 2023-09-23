@@ -8,8 +8,10 @@ from grovepi import *
 
 led = 4
 ultrasonic_ranger = 3
+button = 2
 
 pinMode(led, "OUTPUT")
+pinMode(button, "INPUT")
 
 def led_status(client, userdata, message):
     if (str(message.payload, "utf-8") == "LED_ON"):
@@ -40,8 +42,11 @@ if __name__ == '__main__':
 
     time.sleep(1)
     while True:
+        button_status = digitalRead(button)
         distance = ultrasonicRead(ultrasonic_ranger)
         client.publish("davidd82/ultrasonicRanger", distance)
+        if button_status:
+            client.publish("davidd82/button", "Button pressed!")
         time.sleep(1)
             
 
