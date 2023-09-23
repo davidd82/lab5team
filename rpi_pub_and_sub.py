@@ -42,7 +42,6 @@ if __name__ == '__main__':
 
     time.sleep(1)
     while True:
-        print("delete this line")
         time.sleep(1)
             
 
