@@ -11,7 +11,7 @@ ultrasonic_ranger = 3
 
 pinMode(led, "OUTPUT")
 
-def custom_callback(client, userdata, message):
+def led_status(client, userdata, message):
     if (str(message.payload, "utf-8") == "LED_ON"):
         digitalWrite(led,1)
         print("Turned on LED")
@@ -24,7 +24,7 @@ def on_connect(client, userdata, flags, rc):
 
     #subscribe to topics of interest here
     client.subscribe("davidd82/led")
-    client.message_callback_add("davidd82/customCallback", custom_callback)
+    client.message_callback_add("davidd82/customCallback", led_status)
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -33,7 +33,7 @@ def on_message(client, userdata, msg):
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
     client = mqtt.Client()
-    client.on_message = custom_callback
+    client.on_message = led_status
     client.on_connect = on_connect
     client.connect(host="test.mosquitto.org", port=1883, keepalive=60)
     client.loop_start()
