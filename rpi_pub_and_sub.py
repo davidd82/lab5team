@@ -23,7 +23,7 @@ def led_status(client, userdata, message):
         print("Turned off LED")
 
 def lcd_status(client, userdata, message):
-    setText_norefresh(message)
+    setText_norefresh(str(message.payload.decode("utf-8")))
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -41,7 +41,7 @@ def on_message(client, userdata, msg):
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
     client = mqtt.Client()
-    client.on_message = lcd_status
+    client.on_message = lcd_status, led_status
     client.on_connect = on_connect
     client.connect(host="test.mosquitto.org", port=1883, keepalive=60)
     client.loop_start()
